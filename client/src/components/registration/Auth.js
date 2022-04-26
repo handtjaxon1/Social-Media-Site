@@ -18,7 +18,7 @@ export default function Auth(props) {
                 :
                 <Signup />
             }
-            <Button onClick={switchMode}>
+            <Button onClick={switchMode} color="text-primary">
                 { isLogin ? "Don't have an account? Sign Up" : "Already have an account? Sign In" }
             </Button>
         </div>
