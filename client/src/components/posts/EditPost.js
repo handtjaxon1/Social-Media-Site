@@ -7,6 +7,8 @@ export default function AddPost(props) {
     const [formData, setFormData] = useState({});
     const navigate = useNavigate();
 
+    // TODO Get the default value from the backend
+
     function handleChange(e) {
         const { name, value } = e.target;
         setFormData((prevState) => ({
@@ -20,7 +22,7 @@ export default function AddPost(props) {
     }
 
     function handleCancel(e) {
-        navigate(CLIENT_URLS.posts)
+        navigate(CLIENT_URLS.posts);
     }
 
     return (
@@ -39,7 +41,7 @@ export default function AddPost(props) {
                         onChange={handleChange}
                     />
                 </FormGroup>
-                <Button type="submit">Post</Button>
+                <Button type="submit">Update</Button>
                 <Button onClick={handleCancel}>Cancel</Button>
             </Form>
         </div>
