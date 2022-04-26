@@ -1,26 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Navbar, NavbarBrand, Nav, NavItem } from "reactstrap";
+import { Navbar, NavbarBrand, Nav, NavItem, Container } from "reactstrap";
 import NavAuthToggle from "./NavAuthToggle";
 import { CLIENT_URLS } from "../../constants/clientRoutes";
 
 export default function Navigation(props) {
-    const { isLoggedIn, setIsLoggedIn } = props;
-
     return (
         <Navbar>
-            <NavbarBrand>
-                <img src="..." alt="Company Logo" />
-            </NavbarBrand>
-            <Nav className="row">
-                <NavItem>
-                    <Link to={CLIENT_URLS.posts}>Feed</Link>
-                </NavItem>
-                <NavItem>
-                    <Link to={CLIENT_URLS.profile}>Profile</Link>
-                </NavItem>
-                <NavAuthToggle isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-            </Nav>
+            <Container className="d-flex justify-content-between align-items-center">
+                <NavbarBrand>
+                    <Link to={CLIENT_URLS.home}>
+                        <img src="..." alt="Company Logo" />
+                    </Link>
+                </NavbarBrand>
+                <Nav>
+                    <NavItem className="me-3">
+                        <Link to={CLIENT_URLS.posts}>Feed</Link>
+                    </NavItem>
+                    <NavItem className="me-3">
+                        <Link to={CLIENT_URLS.profile}>Profile</Link>
+                    </NavItem>
+                    <NavAuthToggle className="me-3" />
+                </Nav>
+            </Container>
         </Navbar>
     );
 }

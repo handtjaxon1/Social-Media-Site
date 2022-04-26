@@ -7,7 +7,6 @@ export default function Auth(props) {
     const [isLogin, setIsLogin] = useState(true);
 
     function switchMode(e) {
-        e.preventDefault();
         setIsLogin(!isLogin);
     }
 
@@ -18,7 +17,7 @@ export default function Auth(props) {
                 :
                 <Signup />
             }
-            <Button onClick={switchMode} color="text-primary">
+            <Button onClick={switchMode} color="dark" className="text-light">
                 { isLogin ? "Don't have an account? Sign Up" : "Already have an account? Sign In" }
             </Button>
         </div>

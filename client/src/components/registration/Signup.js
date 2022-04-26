@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { CLIENT_URLS } from "../../constants/clientRoutes";
 
 export default function Signup(props) {
     const [formData, setFormData] = useState({});
+    const navigate = useNavigate();
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -14,7 +17,30 @@ export default function Signup(props) {
     function handleSubmit(e) {
         e.preventDefault();
 
-        // TODO Submit request to the server to signup and create a user
+        const opts = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        }
+        // TODO Add full route here
+        fetch("/api/users/register", opts)
+            .then(res => {
+                if (res.status === 200) {
+                    return res.json();
+                } else {
+                    alert("There was some sort of error");
+                }
+            })
+            .then(data => {
+                // NOTE 'access_token' is retrieved from the var name in users.py
+                sessionStorage.setItem("token", data.access_token);
+                navigate(CLIENT_URLS.posts);
+            })
+            .catch(err => {
+                console.error("There was an error when logging in. ", err);
+            })
     }
 
     return (
@@ -80,7 +106,7 @@ export default function Signup(props) {
                     onChange={handleChange}
                 />
             </FormGroup>
-            <Button type="submit">Sign Up</Button>
+            <Button type="submit" color="primary" className="text-light">Sign Up</Button>
         </Form>
     );
 }
