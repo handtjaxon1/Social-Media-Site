@@ -1,5 +1,12 @@
+from flask_bcrypt import Bcrypt
+import re
+
 from flask_api.config.mysqlconnection import connectToMySQL
-from flask import flash
+from flask_api import app
+
+bcrypt = Bcrypt(app)
+
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class User:
     db_name = "social_media_site"
@@ -21,12 +28,12 @@ class User:
         self.likes = []
     
     # ---------- Model Validations
-    def validate( user ):
+    def validate( user, REGISTER=False ):
         is_valid = True
         errors = dict()
         
-        if len(user["email"]) < 5:
-            errors["email"] = "Email format is invalid"
+        if not EMAIL_REGEX.match(user["email"]):
+            errors["email"] = "Email format is invalid."
             is_valid = False
         if len(user["username"]) < 3:
             errors["username"] = "Username must be at least 3 characters."
@@ -34,6 +41,10 @@ class User:
         if len(user["password"]) < 3:
             errors["password"] = "Password must be at least 3 characters."
             is_valid = False
+        if REGISTER: 
+            if user["password"] != user["confirm_password"]:
+                errors["confirm_password"] = "Passwords must match."
+                is_valid = False
         if len(user["display_name"]) < 3:
             errors["username"] = "Display Name must be at least 3 characters."
             is_valid = False
@@ -44,8 +55,7 @@ class User:
     def create( cls, data ):
         query = """INSERT INTO users (email, username, password, display_name, profile_img_url, created_at, updated_at) 
                 VALUES(%(email)s, %(username)s, %(password)s, %(display_name)s, %(profile_img_url)s, NOW(), NOW());"""
-        user_id = connectToMySQL(cls.db_name).query_db( query, data )
-        return user_id
+        return connectToMySQL(cls.db_name).query_db( query, data )
     @classmethod
     def update( cls, data ):
         query = """UPDATE users SET email=%(email)s, username=%(username)s, password=%(password)s,
@@ -56,8 +66,8 @@ class User:
     @classmethod
     def delete( cls, data ):
         query = "DELETE FROM users WHERE id = %(id)s"
-        result = connectToMySQL(cls.db_name).query_db( query, data )
-        return result
+        connectToMySQL(cls.db_name).query_db( query, data )
+        return {"confirmation": "User successfully deleted"}
     
     # ---------- Get Method Queries
     @classmethod
@@ -73,8 +83,7 @@ class User:
                 users.append( cls(result) )
             return users
     @classmethod
-    def get_by_id( cls, user_id, JSON=False ):
-        data = { "id": user_id }
+    def get_by_id( cls, data, JSON=False ):
         query = "SELECT * FROM users WHERE id = %(id)s"
         result = connectToMySQL(cls.db_name).query_db( query, data )
         
@@ -82,5 +91,16 @@ class User:
             return result[0]
         else:
             return cls( result[0] )
-    
+    @classmethod
+    def get_by_email( cls, data, JSON=False ):
+        query = "SELECT * FROM users WHERE email=%(email)s"
+        result = connectToMySQL(cls.db_name).query_db( query, data )
+        
+        if len(result) < 1:
+            return False
+        
+        if JSON:
+            return result[0]
+        else:
+            return cls( result[0] )
     

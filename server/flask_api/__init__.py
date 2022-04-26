@@ -1,6 +1,10 @@
-from flask import Flask, session
+from dotenv import load_dotenv
+from flask import Flask
+
+load_dotenv()
+import os
+
 app = Flask(__name__)
 
-# Could add this to environment vars in a .env file after importing the dotenv package?
-# need to move to a non-github folder
-app.secret_key = "shhhhhh"
+app.secret_key = os.getenv("SECRET_KEY")
+app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")

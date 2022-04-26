@@ -5,7 +5,12 @@ name = "pypi"
 
 [packages]
 pymysql = "*"
-flask = "*"
+flask = "==2.0.3"
+python-dotenv = "*"
+werkzeug = "==2.0.3"
+flask-bcrypt = "*"
+pyjwt = "*"
+flask-jwt-extended = "*"
 
 [dev-packages]
 
