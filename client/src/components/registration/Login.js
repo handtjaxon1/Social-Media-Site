@@ -29,7 +29,7 @@ export default function Login(props) {
             body: JSON.stringify(formData)
         }
         // TODO Add full route here
-        fetch("/api/users/login", opts)
+        fetch("http://localhost:5000/api/users/login", opts)
             .then(res => {
                 if (res.status === 200) {
                     return res.json();

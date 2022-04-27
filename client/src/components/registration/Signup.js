@@ -25,7 +25,7 @@ export default function Signup(props) {
             body: JSON.stringify(formData)
         }
         // TODO Add full route here
-        fetch("/api/users/register", opts)
+        fetch("http://localhost:5000/api/users/register", opts)
             .then(res => {
                 if (res.status === 200) {
                     return res.json();
