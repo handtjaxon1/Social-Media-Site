@@ -1,16 +1,18 @@
-from flask import jsonify, request, session
+from flask import jsonify, request
 from flask_bcrypt import Bcrypt
 
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
-from flask_jwt_extended import JWTManager
 
 from flask_api.models.user import User
 from flask_api import app
 
-jwt = JWTManager(app)
 bcrypt = Bcrypt(app)
+
+"""
+    - GET user with posts.
+"""
 
 """
     --------------- Login/Registration Routes
@@ -112,8 +114,13 @@ def delete_user():
 def get_logged_in_user():
     user_id = get_jwt_identity()
     data = { "id": user_id }
-    return jsonify(User.get_by_id( data, JSON=True ))
-
-"""
-    GET user with posts.
-"""
+    res = jsonify(User.get_by_id( data, JSON=True ))
+    res.status_code = 200
+    return res
+@app.route("/api/users/posts", methods=["GET"])
+@jwt_required()
+def get_logged_in_user_with_posts():
+    user_id = get_jwt_identity()
+    res = jsonify(User.get_user_by_id_with_posts({"id": user_id}))
+    res.status_code = 200
+    return res
