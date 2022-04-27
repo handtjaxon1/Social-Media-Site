@@ -24,3 +24,6 @@ Clone the repository to your local machine and then run the following setups to 
 4. run 'pipenv install python-dotenv'
 5. run 'pipenv install flask-cors'
 6. run 'pipenv install flask-bcrypt'
+
+### Database Configuration
+1. Use the MySQL model in the 'other' folder to create a database.
