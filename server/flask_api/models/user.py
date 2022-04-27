@@ -21,10 +21,10 @@ class User:
         # Relationships
         self.posts = []
         self.comments = []
-        self.likes = []
     
     # ---------- Model Validations
-    def validate( user, REGISTER=False ):
+    @classmethod
+    def validate( cls, user, REGISTER=False ):
         is_valid = True
         errors = dict()
         
@@ -101,4 +101,31 @@ class User:
             return result[0]
         else:
             return cls( result[0] )
+    @classmethod
+    def get_user_by_id_with_posts( cls, data ):
+        query = """SELECT * FROM users
+                    LEFT JOIN posts ON posts.user_id = users.id
+                    WHERE users.id = %(id)s;"""
+        results =  connectToMySQL(cls.db_name).query_db( query, data )
+        result = results[0]
+        
+        user = {
+            "email": result["email"],
+            "display_name": result["display_name"],
+            "username": result["username"],
+            "profile_img_url": result["profile_img_url"],
+            "posts": list(),
+                "created_at": result["created_at"],
+                "updated_at": result["updated_at"]
+        }
+        for row_from_db in results:
+            post_data = {
+                "id": row_from_db["posts.id"],
+                "content": row_from_db["content"],
+                "likes": row_from_db["likes"],
+                "created_at": row_from_db["posts.created_at"],
+                "updated_at": row_from_db["posts.updated_at"]
+            }
+            user["posts"].append( post_data )
+        return user
     
