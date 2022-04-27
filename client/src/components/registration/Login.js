@@ -67,7 +67,7 @@ export default function Login(props) {
                     <Input
                         type="password"
                         id="password"
-                        name="empasswordail"
+                        name="password"
                         value={formData.password}
                         onChange={handleChange}
                     />

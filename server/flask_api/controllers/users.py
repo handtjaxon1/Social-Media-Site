@@ -74,7 +74,6 @@ def login_user():
         res.status_code = 400
         return res
     
-    session["user_id"] = user_in_db.id
     access_token = create_access_token( identity=user_in_db.id )
     return jsonify( access_token=access_token )
 

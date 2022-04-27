@@ -91,8 +91,8 @@ export default function Signup(props) {
                 <Input
                     type="password"
                     id="confirm"
-                    name="confirm"
-                    value={formData.confirm}
+                    name="confirm_password"
+                    value={formData.confirm_password}
                     onChange={handleChange}
                 />
             </FormGroup>

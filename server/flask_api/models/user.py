@@ -35,9 +35,10 @@ class User:
         if not EMAIL_REGEX.match(user["email"]):
             errors["email"] = "Email format is invalid."
             is_valid = False
-        if len(user["username"]) < 3:
-            errors["username"] = "Username must be at least 3 characters."
-            is_valid = False
+        if REGISTER: 
+            if len(user["username"]) < 3:
+                errors["username"] = "Username must be at least 3 characters."
+                is_valid = False
         if len(user["password"]) < 3:
             errors["password"] = "Password must be at least 3 characters."
             is_valid = False
@@ -45,9 +46,10 @@ class User:
             if user["password"] != user["confirm_password"]:
                 errors["confirm_password"] = "Passwords must match."
                 is_valid = False
-        if len(user["display_name"]) < 3:
-            errors["username"] = "Display Name must be at least 3 characters."
-            is_valid = False
+        if REGISTER: 
+            if len(user["display_name"]) < 3:
+                errors["username"] = "Display Name must be at least 3 characters."
+                is_valid = False
         return ( is_valid, errors )
     
     # ---------- Database Entry Modifying Queries
