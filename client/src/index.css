@@ -11,3 +11,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.btn-login {
+  max-width: 260px;
+}
+
+.border-login {
+  border-radius: 10px;
+}
+
+.border-round {
+  border-radius: 10px;
+}
+
+.border-shadow {
+  box-shadow: 0px 3px 5px 3px rgba(60, 60, 60, 0.4);
+}
+
+.border-shadow-light {
+  box-shadow: 0px 3px 5px 3px rgba(60, 60, 60, 0.1);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-pointer:hover {
+  background-color: #f3f3f3;
+}

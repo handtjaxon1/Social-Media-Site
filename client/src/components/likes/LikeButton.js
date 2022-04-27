@@ -11,7 +11,8 @@ export default function LikeButton(props) {
     function handleLike(e) {
         e.preventDefault();
         // TODO Submit put request to api to like the corresponding post or comment that this like is placed on
-        likes += isLiked ? 1 : -1;
+        likes = likes + (isLiked ? 5 : -1);
+        console.log(likes);
         setIsLiked(!isLiked);
     }
 
@@ -22,8 +23,8 @@ export default function LikeButton(props) {
 
     // TODO Could create custom styles to change the like button in some way to show whether it's liked or not
     return (
-        <button onClick={handleLike} className={ alreadyLiked() ? "btn btn-primary" : "btn btn-outline-primary"}>
-            {likes ? likes : "0"} Likes
+        <button onClick={handleLike} className={ alreadyLiked() ? "btn btn-primary text-light" : "btn btn-outline-primary"}>
+            { isLiked ? "Unlike" : "Like"}
         </button>
     );
 }
