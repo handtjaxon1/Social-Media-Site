@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import { CLIENT_URLS } from "../../constants/clientRoutes";
 
 export default function Login(props) {
     const [formData, setFormData] = useState({});
@@ -27,7 +26,7 @@ export default function Login(props) {
             .then(response => {
                 console.log("Logged in");
                 sessionStorage.setItem("token", response.data.access_token);
-                navigate(CLIENT_URLS.posts);
+                navigate("/profile");
             })
             .catch(err => {
                 console.error("There was an error when logging in. ", err);
@@ -36,7 +35,7 @@ export default function Login(props) {
 
     return (
         <div>
-            <h1>Log In</h1>
+            <h1 className="text-center">Log In</h1>
             { !isTokenValid() &&
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
@@ -59,7 +58,9 @@ export default function Login(props) {
                         onChange={handleChange}
                     />
                 </FormGroup>
-                <Button type="submit" color="primary" className="text-light">Login</Button>
+                <div className="d-flex justify-content-center">
+                    <Button type="submit" color="primary" className="text-light btn-login w-100">Login</Button>
+                </div>
             </Form>
             }
         </div>

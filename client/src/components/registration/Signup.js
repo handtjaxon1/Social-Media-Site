@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import { CLIENT_URLS } from "../../constants/clientRoutes";
 
 export default function Signup(props) {
     const [formData, setFormData] = useState({});
@@ -16,36 +16,20 @@ export default function Signup(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-
-        const opts = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        }
-        // TODO Add full route here
-        fetch("http://localhost:5000/api/users/register", opts)
-            .then(res => {
-                if (res.status === 200) {
-                    return res.json();
-                } else {
-                    alert("There was some sort of error");
-                }
-            })
-            .then(data => {
-                // NOTE 'access_token' is retrieved from the var name in users.py
-                sessionStorage.setItem("token", data.access_token);
-                navigate(CLIENT_URLS.posts);
-            })
-            .catch(err => {
-                console.error("There was an error when logging in. ", err);
-            })
+        axios.post("http://localhost:5000/api/users/register", formData)
+        .then(response => {
+            console.log("Signed up");
+            sessionStorage.setItem("token", response.data.access_token);
+            navigate("/profile");
+        })
+        .catch(err => {
+            console.error("There was an error when signing up. ", err);
+        });
     }
 
     return (
         <Form onSubmit={handleSubmit}>
-            <h1>Sign Up!</h1>
+            <h1 className="text-center">Sign Up</h1>
             <FormGroup>
                 <Label htmlFor="display_name">Display Name</Label>
                 <Input
@@ -106,7 +90,9 @@ export default function Signup(props) {
                     onChange={handleChange}
                 />
             </FormGroup>
-            <Button type="submit" color="primary" className="text-light">Sign Up</Button>
+            <div className="d-flex justify-content-center">
+                <Button type="submit" color="primary" className="text-light btn-login w-100">Sign Up</Button>
+            </div>
         </Form>
     );
 }

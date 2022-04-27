@@ -5,7 +5,7 @@ import { Container } from "reactstrap";
 // This component serves purely as a "wrapper" around the main page content
 export default function Layout(props) {
     return (
-        <Container className="py-3">
+        <Container className="py-5">
             <Outlet />
         </Container>
     );

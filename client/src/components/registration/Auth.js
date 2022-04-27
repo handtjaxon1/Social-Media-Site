@@ -11,15 +11,17 @@ export default function Auth(props) {
     }
 
     return (
-        <div>
+        <div className="border-round bg-light p-4">
             { isLogin ?
                 <Login />
                 :
                 <Signup />
             }
-            <Button onClick={switchMode} color="dark" className="text-light">
-                { isLogin ? "Don't have an account? Sign Up" : "Already have an account? Sign In" }
-            </Button>
+            <div className="d-flex justify-content-center">
+                <Button onClick={switchMode} color="dark" className="text-light btn-login w-100 mt-2">
+                    { isLogin ? "Don't have an account? Sign Up" : "Already have an account? Sign In" }
+                </Button>
+            </div>
         </div>
     );
 }

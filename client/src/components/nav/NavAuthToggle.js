@@ -25,12 +25,15 @@ export default function NavAuthToggle(props) {
     return (
         <>
             <NavItem>
+            { isTokenValid() && <Link to={CLIENT_URLS.empty} onClick={toLogout}>Logout</Link> }
+            </NavItem>
+            {/* <NavItem>
             { isTokenValid() ?
                 <Link to={CLIENT_URLS.empty} onClick={toLogout}>Logout</Link>
                 :
                 <Link to={CLIENT_URLS.empty} onClick={toLogin}>Login</Link>
             }
-            </NavItem>
+            </NavItem> */}
         </>
     );
 }
