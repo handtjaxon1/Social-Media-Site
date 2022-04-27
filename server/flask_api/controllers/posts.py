@@ -99,3 +99,9 @@ def get_post_with_user_comments_and_comments_users( post_id ):
     res = jsonify( Post.get_by_id_with_comments({"post_id": post_id}))
     res.status_code = 200
     return res
+@app.route("/api/posts/all", methods=["GET"])
+@jwt_required()
+def get_all_posts():
+    res = jsonify( Post.get_all(JSON=True) )
+    res.status_code = 200
+    return res
