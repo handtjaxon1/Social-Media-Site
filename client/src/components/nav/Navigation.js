@@ -6,11 +6,11 @@ import { CLIENT_URLS } from "../../constants/clientRoutes";
 
 export default function Navigation(props) {
     return (
-        <Navbar>
+        <Navbar className="shadow border border-secondary">
             <Container className="d-flex justify-content-between align-items-center">
                 <NavbarBrand>
                     <Link to={CLIENT_URLS.home}>
-                        <img src="..." alt="Company Logo" />
+                        <img src="/imgs/ourspace.png" alt="Company Logo" style={{ height: "64px", width: "64px" }}/>
                     </Link>
                 </NavbarBrand>
                 <Nav>

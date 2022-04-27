@@ -3,9 +3,15 @@ export const CLIENT_URLS = {
     empty: "",
     no_match: "*",
     home: "/",
-    auth: "/auth",
+    auth: "/authorization",
     profile: "/profile",
+
     posts: "/posts",
     add_post: "/posts/add",
-    edit_post: "/posts/edit/"
+    edit_post: "/posts/edit/",
+    view_post: "/posts/view/",
+
+    add_comment: "/posts/comments/add",
+    edit_comment: "/posts/comments/edit/",
+    view_comment: "/posts/comments/view/",
 };

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { CLIENT_URLS } from "../../constants/clientRoutes";
 
@@ -21,30 +22,16 @@ export default function Login(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        const opts = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        }
-        // TODO Add full route here
-        fetch("http://localhost:5000/api/users/login", opts)
-            .then(res => {
-                if (res.status === 200) {
-                    return res.json();
-                } else {
-                    alert("There was some sort of error");
-                }
-            })
-            .then(data => {
-                // NOTE 'access_token' is retrieved from the var name in users.py
-                sessionStorage.setItem("token", data.access_token);
+
+        axios.post("http://localhost:5000/api/users/login", formData)
+            .then(response => {
+                console.log("Logged in");
+                sessionStorage.setItem("token", response.data.access_token);
                 navigate(CLIENT_URLS.posts);
             })
             .catch(err => {
                 console.error("There was an error when logging in. ", err);
-            })
+            });
     }
 
     return (
