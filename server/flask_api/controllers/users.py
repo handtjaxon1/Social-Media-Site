@@ -113,3 +113,7 @@ def get_logged_in_user():
     user_id = get_jwt_identity()
     data = { "id": user_id }
     return jsonify(User.get_by_id( data, JSON=True ))
+
+"""
+    GET user with posts.
+"""

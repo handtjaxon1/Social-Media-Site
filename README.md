@@ -18,3 +18,9 @@ Clone the repository to your local machine and then run the following setups to 
 3. run 'npm start' to start the React app
 
 ### Back End Configuration
+1. navigate to 'server' in the terminal
+2. run 'pipenv shell'
+3. run 'pipenv install PyMySQL flask'
+4. run 'pipenv install python-dotenv'
+5. run 'pipenv install flask-cors'
+6. run 'pipenv install flask-bcrypt'

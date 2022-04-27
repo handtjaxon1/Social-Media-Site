@@ -1,10 +1,6 @@
-from flask_bcrypt import Bcrypt
 import re
 
 from flask_api.config.mysqlconnection import connectToMySQL
-from flask_api import app
-
-bcrypt = Bcrypt(app)
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
