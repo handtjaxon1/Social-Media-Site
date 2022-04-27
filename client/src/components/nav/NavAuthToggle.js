@@ -12,10 +12,12 @@ export default function NavAuthToggle(props) {
     }
 
     function toLogin(e) {
+        e.preventDefault();
         navigate(CLIENT_URLS.auth);
     }
 
     function toLogout(e) {
+        e.preventDefault();
         sessionStorage.removeItem("token");
         navigate(CLIENT_URLS.home);
     }
