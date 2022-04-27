@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { CLIENT_URLS } from "../../constants/clientRoutes";
 
 export default function AddPost(props) {
     const [formData, setFormData] = useState({});
     const navigate = useNavigate();
+    const { post_id } = useParams();
 
     // TODO Get the default value from the backend
 
@@ -18,10 +20,19 @@ export default function AddPost(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
+        axios.post("http://localhost:5000/api/posts/edit/" + post_id, formData)
+        .then(response => {
+            console.log("Edited a post");
+            navigate(CLIENT_URLS.posts);
+        })
+        .catch(error => {
+            console.error("There was an error creating a post.", error)
+        });
         navigate(CLIENT_URLS.posts);
     }
 
     function handleCancel(e) {
+        console.log("Cancelled editing a post");
         navigate(CLIENT_URLS.posts);
     }
 

@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
@@ -16,11 +17,19 @@ export default function AddPost(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        navigate(CLIENT_URLS.posts);
+        axios.post("http://localhost:5000/api/posts/add", formData)
+            .then(response => {
+                console.log("Created a post");
+                navigate(CLIENT_URLS.posts);
+            })
+            .catch(error => {
+                console.error("There was an error creating a post.", error)
+            });
     }
 
     function handleCancel(e) {
-        navigate(CLIENT_URLS.posts)
+        console.log("Cancelled creating a post");
+        navigate(CLIENT_URLS.posts);
     }
 
     return (
