@@ -9,7 +9,7 @@ export default function Posts(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/posts/all", {
+        axios.get("http://localhost:5000/api/posts", {
             headers: {
                 "Authorization": `Bearer ${sessionStorage.getItem("token")}`
             }

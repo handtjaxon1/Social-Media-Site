@@ -78,7 +78,7 @@ class Post:
                 users.append( cls(result) )
             return users
     @classmethod
-    def get_all_with_users( cls, JSON=False ):
+    def get_all_with_user( cls, JSON=False ):
         query = """SELECT * FROM posts
                     JOIN users ON users.id = posts.user_id"""
         results = connectToMySQL(cls.db_name).query_db( query )

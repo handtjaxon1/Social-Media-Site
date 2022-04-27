@@ -89,7 +89,7 @@ def delete_post( post_id ):
 """
 @app.route("/api/posts", methods=["GET"])
 @jwt_required()
-def get_all_posts_with_user():
+def get_all_posts_with_users():
     res = jsonify( Post.get_all_with_user(JSON=True) )
     res.status_code = 200
     return res
