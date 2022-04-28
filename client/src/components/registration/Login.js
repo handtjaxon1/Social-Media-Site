@@ -25,6 +25,7 @@ export default function Login(props) {
         axios.post("http://localhost:5000/api/users/login", formData)
             .then(response => {
                 console.log("Logged in");
+                console.log(response);
                 sessionStorage.setItem("token", response.data.access_token);
                 navigate("/profile");
             })

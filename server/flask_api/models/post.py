@@ -91,6 +91,7 @@ class Post:
                     "content": result["content"],
                     "likes": result["likes"],
                     "user": {
+                        "id": result["user_id"],
                         "display_name": result["display_name"],
                         "username": result["username"],
                         "profile_img_url": result["profile_img_url"]
@@ -101,6 +102,7 @@ class Post:
             posts = list()
             for result in results:
                 user = {
+                    "id": result["user_id"],
                     "display_name": result["display_name"],
                     "username": result["username"],
                     "profile_img_url": result["profile_img_url"]
@@ -126,6 +128,7 @@ class Post:
             "content": result["content"],
             "likes": result["likes"],
             "user": {
+                "id": result["user_id"],
                 "display_name": result["display_name"],
                 "username": result["username"],
                 "profile_img_url": result["profile_img_url"]

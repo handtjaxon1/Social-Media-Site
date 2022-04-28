@@ -17,6 +17,7 @@ export default function Posts(props) {
             .then(response => {
                 // Expects an array of objects back
                 setPosts(response.data);
+                console.log(response);
             })
             .catch(error => {
                 console.error("Error retrieving all posts from the server.", error);
