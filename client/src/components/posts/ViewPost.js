@@ -22,7 +22,7 @@ export default function ViewPost(props) {
         .catch(err => {
             console.error("There was an error while viewing the post.", err);
         })
-    }, []);
+    }, [id]);
 
     function back(e) {
         e.preventDefault();
@@ -30,11 +30,8 @@ export default function ViewPost(props) {
     }
 
     function editPost(e) {
-        axios.put(`http://localhost:5000/api/posts/${id}`, {
-            headers: {
-                "Authorization": `Bearer ${sessionStorage.getItem("token")}`
-            }
-        })
+        e.preventDefault();
+        navigate(`/posts/${id}/edit`)
     }
 
     function deletePost(e) {

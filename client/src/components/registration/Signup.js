@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button, InputGroup, InputGroupText } from "reactstrap";
+
+const initialState = { display_name: "", username: "", email: "", password: "", confirm_password: "", profile_img_url: "" };
 
 export default function Signup(props) {
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState(initialState);
     const navigate = useNavigate();
 
     function handleChange(e) {
@@ -42,13 +44,16 @@ export default function Signup(props) {
             </FormGroup>
             <FormGroup>
                 <Label htmlFor="username">Username</Label>
-                <Input
-                    type="text"
-                    id="username"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                />
+                <InputGroup>
+                    <InputGroupText>@</InputGroupText>
+                    <Input
+                        type="text"
+                        id="username"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                    />
+                </InputGroup>
             </FormGroup>
             <FormGroup>
                 <Label htmlFor="email">Email</Label>

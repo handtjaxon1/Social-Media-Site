@@ -1,19 +1,29 @@
+import axios from "axios";
 import React, { useState } from "react";
 import "./LikeButton.css";
 
 export default function LikeButton(props) {
-    // const { likes, isLiked, setIsLiked } = props;
-    // TODO Could likely get these variables all from props passed down from the parent post/comment
-    // const { likes } = props;
-    let likes = 0;
+    const { post } = props;
     const [isLiked, setIsLiked] = useState(false);
 
     function handleLike(e) {
         e.preventDefault();
-        // TODO Submit put request to api to like the corresponding post or comment that this like is placed on
-        likes = likes + (isLiked ? 5 : -1);
-        console.log(likes);
-        setIsLiked(!isLiked);
+        e.stopPropagation();
+        axios.put("http://localhost:5000/api/posts/" + post.id, {
+            ...post,
+            likes: isLiked ? post.likes - 1 : post.likes + 1
+        }, {
+            headers: {
+                "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+            }
+        })
+        .then(response => {
+            console.log(response.config.data);
+            setIsLiked(!isLiked);
+        })
+        .catch(err => {
+            console.error("There was an error updating the post likes.", err);
+        })
     }
 
     function alreadyLiked() {

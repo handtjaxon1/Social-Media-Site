@@ -95,7 +95,8 @@ class Post:
                         "display_name": result["display_name"],
                         "username": result["username"],
                         "profile_img_url": result["profile_img_url"]
-                    }
+                    },
+                    "updated_at": result["updated_at"]
                 })
             return posts
         else:
@@ -110,7 +111,8 @@ class Post:
                 post = Post({
                     "id": result["id"],
                     "content": result["content"],
-                    "likes": result["likes"]
+                    "likes": result["likes"],
+                    "updated_at": result["updated_at"]
                 })
                 post.user = user
                 posts.append( post )
@@ -133,7 +135,8 @@ class Post:
                 "username": result["username"],
                 "profile_img_url": result["profile_img_url"]
             },
-            "comments": comments
+            "comments": comments,
+            "updated_at": result["updated_at"]
         }
         return post
     

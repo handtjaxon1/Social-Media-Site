@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, FormGroup, Label, Input, Button, Row, Col } from "reactstrap";
 
+const initialState = { content: "" };
+
 export default function AddPost(props) {
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState(initialState);
     const navigate = useNavigate();
 
     function handleChange(e) {
@@ -49,8 +51,8 @@ export default function AddPost(props) {
                             value={formData.content}
                             placeholder="What's on your mind..."
                             onChange={handleChange}
-                            rows="10"
-                            className="border-primary"
+                            rows="15"
+                            className="border-primary preserve-whitespace"
                         />
                     </FormGroup>
                     <Row className="justify-content-around">

@@ -6,7 +6,7 @@ import Navigation from "./components/nav/Navigation";
 import AddPost from "./components/posts/AddPost";
 import EditPost from "./components/posts/EditPost";
 import ViewPost from "./components/posts/ViewPost";
-import Profile from "./components/Profile";
+import Profile from "./components/profile/Profile";
 import NoMatch from "./components/NoMatch";
 import Layout from "./components/Layout";
 

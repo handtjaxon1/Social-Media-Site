@@ -39,3 +39,12 @@ code {
 .cursor-pointer:hover {
   background-color: #f3f3f3;
 }
+
+.preserve-whitespace {
+  white-space: pre-wrap;
+}
+
+.img-profile {
+  width: 128px;
+  height: 128px;
+}

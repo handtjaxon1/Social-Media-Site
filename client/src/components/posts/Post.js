@@ -17,25 +17,31 @@ export default function Post(props) {
     }
 
     return (
-        <div className="border-round border-shadow p-5 col-12 col-md-10 col-lg-8 cursor-pointer d-flex my-3" onClick={postClicked}>
-            <img src="/imgs/profile-pic.png" alt="profile-pic" className="rounded-circle border-shadow-light me-5" style={{ width: "128px", height: "128px"}}/>
+        <div className="d-flex border-round border-shadow p-5 my-3 col-12 col-md-10 col-lg-8 cursor-pointer" onClick={postClicked}>
+            <img
+                src="/imgs/profile-pic.png"
+                alt="profile-pic"
+                className="img-profile rounded-circle border-shadow-light me-5"
+            />
             <div className="d-flex flex-column">                
                 <div>
-                    <h3>{post?.user?.display_name}</h3>
-                    <h4>@{post?.user?.username}</h4>
+                    <h4>{post?.user?.display_name}</h4>
+                    <h5>@{post?.user?.username}</h5>
                 </div>
                 <div>
-                    <p className="fs-5">
+                    <p className="preserve-whitespace">
                         {post?.content}
                     </p>
                     <div>
-                        {/* TODO May need to change post.likes to post.likes.length if it's treated as an array rather than counter */}
-                        <LikeButton likes={post?.likes}></LikeButton>
-                        <Button onClick={handleComment} color="primary text-light" className="ms-3"> Comment</Button>
+                        <LikeButton post={post}/>
+                        <Button
+                            onClick={handleComment}
+                            color="primary text-light"
+                            className="ms-3"
+                        >Comment</Button>
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }

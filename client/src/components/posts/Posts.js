@@ -29,15 +29,21 @@ export default function Posts(props) {
         navigate("/posts/add");
     }
 
+    function sortByDate(a, b) {
+        let dateTimeA = a.updated_at.split(/[- :]/);
+        let dateTimeB = b.updated_at.split(/[- :]/);
+        return Date(dateTimeA) > Date(dateTimeB);
+    }
+
     return (
         <div>
             <div className="text-center">
-                <h1>Posts Page</h1>
+                <h1 className="display-5">Posts Page</h1>
                 <Button color="primary" className="text-light my-3" onClick={toCreatePost}>Create Post</Button>
             </div>
             <div  className="d-flex align-items-center flex-column">
                 {/* TODO Add option to filter by keywords from the posts maybe? */}
-                { posts && posts.map((post) => <Post post={post}/>) }
+                { posts && posts.sort((a, b) => sortByDate(a, b)).map((post, index) => <Post post={post} key={index}/>) }
             </div>
         </div>
     );

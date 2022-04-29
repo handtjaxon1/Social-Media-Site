@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
+const initialState = { email: "", password: "" };
+
 export default function Login(props) {
-    const [formData, setFormData] = useState({});
-    const navigate = useNavigate();
     const token = sessionStorage.getItem("token");
+    const [formData, setFormData] = useState(initialState);
+    const navigate = useNavigate();
 
     function isTokenValid() {
         return token && token !== "" && token !== undefined;
@@ -21,7 +23,6 @@ export default function Login(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-
         axios.post("http://localhost:5000/api/users/login", formData)
             .then(response => {
                 console.log("Logged in");
